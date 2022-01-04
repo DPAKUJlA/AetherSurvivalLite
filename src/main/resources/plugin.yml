@@ -1,0 +1,9 @@
+name: ASL
+version: '${project.version}'
+main: aethersl.Main
+api-version: 1.16
+commands:
+  fullbright:
+    usage: /fullbright or /fb
+    description: Enable or disable infinite night vision
+    aliases: [fb]
