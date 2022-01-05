@@ -1,0 +1,13 @@
+modify-fall-damage:
+  enable: true
+  modifier: 0.5
+modify-saturation:
+  enable: true
+  modifier: 1.5
+fullbrigth:
+  enable: true
+
+messages:
+  not-enable-option: "&cThis option are disable by system administrator!"
+  enable-fullbrigth: "&6You have &aenable &6infinity night vision"
+  disable-fullbrigth: "&6You have &cdisable &6infinity night vision"

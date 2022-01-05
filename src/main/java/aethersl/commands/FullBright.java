@@ -21,13 +21,18 @@ public class FullBright implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if(!this.plugin.getConfig().getBoolean("fullbrigth.enable")) {
+            sender.sendMessage(this.plugin.getConfig().getString("messages.not-enable-option").replace("&", "§"));
+            return true;
+        }
+
         Player p = (Player) sender;
         if (p.hasPotionEffect(PotionEffectType.NIGHT_VISION)) {
             p.removePotionEffect(PotionEffectType.NIGHT_VISION);
-            sender.sendMessage(ChatColor.GOLD + "&6You have " + ChatColor.RED + "disable " + ChatColor.GOLD + "infinity night vision");
+            sender.sendMessage(this.plugin.getConfig().getString("messages.disable-fullbrigth").replace("&", "§"));
         } else {
             p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 1));
-            sender.sendMessage(ChatColor.GOLD + "&6You have " + ChatColor.GREEN + "enable " + ChatColor.GOLD + "infinity night vision");
+            sender.sendMessage(this.plugin.getConfig().getString("messages.enable-fullbrigth").replace("&", "§"));
         }
         return true;
     }

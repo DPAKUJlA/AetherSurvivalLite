@@ -1,12 +1,10 @@
 package aethersl;
 
-import de.tr7zw.changeme.nbtapi.NBTItem;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 
 public class Handler implements Listener {
 
@@ -18,18 +16,19 @@ public class Handler implements Listener {
 
     @EventHandler
     public void onFallDamagePlayer(EntityDamageEvent e){
-        if (e.getEntity() instanceof Player){
-            if(e.getCause() == EntityDamageEvent.DamageCause.FALL){
-                e.setDamage(e.getDamage()*0.5);
+        if(this.plugin.getConfig().getBoolean("modify-fall-damage.enable")){
+            if (e.getEntity() instanceof Player){
+                if(e.getCause() == EntityDamageEvent.DamageCause.FALL){
+                    e.setDamage(e.getDamage() * this.plugin.getConfig().getDouble("modify-fall-damage.modifier"));
+                }
             }
         }
     }
 
     @EventHandler
-    public void onPlayerItemConsume(PlayerItemConsumeEvent e){
-        if(e.getItem().getType().equals(Material.POTION)) return;
-        NBTItem nbtItem = new NBTItem(e.getItem());
-
-        e.getPlayer().setFoodLevel( e.getPlayer().getFoodLevel() + (int) (nbtItem.getInteger("FoodLevel") * 1.5));
+    public void onFoodLevelChange(FoodLevelChangeEvent e){
+        if(this.plugin.getConfig().getBoolean("modify-saturation.enable")) {
+            e.setFoodLevel((int) (e.getFoodLevel() * this.plugin.getConfig().getDouble("modify-saturation.modifier")));
+        }
     }
 }

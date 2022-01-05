@@ -3,6 +3,9 @@ version: '${project.version}'
 main: aethersl.Main
 api-version: 1.16
 commands:
+  reload:
+    usage: /asl reload
+    description: Reload plugin config
   fullbright:
     usage: /fullbright or /fb
     description: Enable or disable infinite night vision
